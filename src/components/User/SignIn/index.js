@@ -4,7 +4,7 @@ import { TOKEN_KEY } from '../../../services/shared/api';
 
 const SignIn = props => {
 
-    const [user, setUser] = useState({ id: null, login: "", password: "" });
+    const [user, setUser] = useState({ id: null, email: "", password: "" });
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -13,7 +13,7 @@ const SignIn = props => {
 
     const sendLogin = () => {
         let data = {
-            login: user.login,
+            login: user.email,
             password: user.password
         }
 
@@ -30,14 +30,14 @@ const SignIn = props => {
     return (
         <div>
             <div>
-                <label htmlFor="login">Username</label>
+                <label htmlFor="email">Email</label>
                 <input
                     type="text"
-                    id="login"
-                    name="login"
-                    placeholder="Username"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
                     required
-                    value={user.login}
+                    value={user.email}
                     onChange={handleInputChange}
                 />
             </div>
