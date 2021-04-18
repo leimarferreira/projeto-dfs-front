@@ -13,7 +13,7 @@ const SignIn = props => {
 
     const sendLogin = () => {
         let data = {
-            login: user.email,
+            email: user.email,
             password: user.password
         }
 
@@ -23,7 +23,7 @@ const SignIn = props => {
                 // TODO: redirect the user to the main screen
             })
             .catch(error => {
-                console.log(error);
+                // TODO: show a error message to user
             });
     };
 
