@@ -32,7 +32,7 @@ const SignIn = () => {
             <div>
                 <label htmlFor="email">Email</label>
                 <input
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     placeholder="username@domain.com"

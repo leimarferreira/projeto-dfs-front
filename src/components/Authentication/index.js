@@ -10,7 +10,7 @@ const Authentication = () => {
             <span><Link to="/signup">Sign up</Link></span>
 
             <Switch>
-                <Route exact path={"/signin"} component={SignIn} />
+                <Route exact path={["/", "/signin"]} component={SignIn} />
                 <Route exact path={"/signup"} component={SignUp} />
             </Switch>
         </BrowserRouter>
