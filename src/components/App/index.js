@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { SignIn } from '../Authentication/index';
+import Authentication from '../Authentication/index';
 
 function App() {
     return (
         <Switch>
-            <Route exact path={["/", "/login"]} component={SignIn}/>
+            <Route exact path={"/"} component={ Authentication }/>
         </Switch>
     )
 }
