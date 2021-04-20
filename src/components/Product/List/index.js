@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductDataService from '../../../services/Product/index';
+import './index.css';
 
 const List = () => {
     const [products, setProducts] = useState([]);
@@ -18,12 +19,13 @@ const List = () => {
     }
 
     return (
-        <div>
+        <div className="product-list">
             {
                 products.map(product => {
                     return (
                         <div key={product.id}>
                             <p>{ product.name }</p>
+                            <p>{ product.description }</p>
                             <p>{ product.value }</p>
                         </div>
                     );
