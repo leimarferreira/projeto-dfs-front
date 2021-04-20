@@ -5,7 +5,7 @@ import SignUp from './SignUp/index';
 
 const Authentication = () => {
     return (
-        <BrowserRouter>
+        <div>
             <span><Link to="/signin">Sign in</Link></span>
             <span><Link to="/signup">Sign up</Link></span>
 
@@ -13,7 +13,7 @@ const Authentication = () => {
                 <Route exact path={["/", "/signin"]} component={SignIn} />
                 <Route exact path={"/signup"} component={SignUp} />
             </Switch>
-        </BrowserRouter>
+        </div>
     );
 };
 
