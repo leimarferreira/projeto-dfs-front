@@ -1,12 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Authentication from '../Authentication/index';
+import Header from './Header/index'
+import Sidebar from './Sidebar/index';
 
 function App() {
     return (
-        <Switch>
-            <Route exact path={"/"} component={ Authentication }/>
-        </Switch>
+        <div>
+            <Header/>
+            <Sidebar/>
+        </div>
     )
 }
 
