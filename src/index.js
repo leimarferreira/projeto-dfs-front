@@ -13,6 +13,9 @@ ReactDOM.render(
             <Route exact path={"/product"}>
                 <App/>
             </Route>
+            <Route exact path={"/company"}>
+                <App/>
+            </Route>
         </Switch>
     </BrowserRouter>,
     document.getElementById('root')
