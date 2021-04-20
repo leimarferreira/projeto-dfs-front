@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthenticationService from '../../../services/Authentication/index';
 import { TOKEN_KEY } from '../../../services/shared/api';
 
 const SignIn = () => {
 
     const [user, setUser] = useState({ id: null, email: "", password: "" });
+    const history = useHistory();
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -20,6 +22,7 @@ const SignIn = () => {
         AuthenticationService.signIn(data)
             .then(response => {
                 localStorage.setItem(TOKEN_KEY, response.data?.result?.token);
+                history.push("/product");
                 // TODO: redirect the user to the main screen
             })
             .catch(error => {
