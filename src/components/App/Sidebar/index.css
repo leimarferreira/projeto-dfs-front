@@ -6,3 +6,7 @@
     height: 100vh;
     background-color: cadetblue;
 }
+
+nav > a {
+    display: block;
+}
