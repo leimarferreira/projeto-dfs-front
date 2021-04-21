@@ -13,7 +13,19 @@ ReactDOM.render(
             <Route exact path={"/product"}>
                 <App/>
             </Route>
+            <Route path={"/product/:id"}>
+                <App/>
+            </Route>
             <Route exact path={"/company"}>
+                <App/>
+            </Route>
+            <Route path={"/company/:id"}>
+                <App/>
+            </Route>
+            <Route exact path={"/payment"}>
+                <App/>
+            </Route>
+            <Route path={"/user/:userId"}>
                 <App/>
             </Route>
         </Switch>
