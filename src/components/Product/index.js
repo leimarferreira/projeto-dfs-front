@@ -17,8 +17,8 @@ const Product = () => {
             })
             .catch(error => {
                 // TODO: ...
-            })
-    }
+            });
+    };
 
     return (
         <div>
