@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CompanyDataService from '../../../services/Company/index';
+import CompanyCard from '../Card/index';
 
 const List = () => {
     
@@ -18,19 +19,15 @@ const List = () => {
             });
     };
 
+    const companyCards = companies.map(company => {
+        return <CompanyCard company={company}/>
+    });
+
     return (
-        <div>
-            {
-                companies.map(company => {
-                    return (
-                        <div key={company.id}>
-                            <p>{company.tradeName}</p>
-                        </div>
-                    )
-                })
-            }
+        <div className="row">
+            { companyCards }
         </div>
-    )
-}
+    );
+};
 
 export default List;
