@@ -32,9 +32,10 @@ const SignIn = () => {
 
     return (
         <div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
+                    className="form-control"
                     type="email"
                     id="email"
                     name="email"
@@ -45,9 +46,10 @@ const SignIn = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
+                    className="form-control"
                     type="password"
                     id="password"
                     name="password"
@@ -58,7 +60,7 @@ const SignIn = () => {
                 />
             </div>
 
-            <button onClick={sendLogin}>
+            <button onClick={sendLogin} className="btn btn-primary">
                 Submit
             </button>
         </div>

@@ -22,9 +22,10 @@ const SignUp = () => {
 
     return (
         <div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="name"
                     name="name"
@@ -35,9 +36,10 @@ const SignUp = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="cpf">CPF</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="cpf"
                     name="cpf"
@@ -48,9 +50,10 @@ const SignUp = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
+                    className="form-control"
                     type="email"
                     id="email"
                     name="email"
@@ -61,9 +64,10 @@ const SignUp = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
+                    className="form-control"
                     type="password"
                     id="password"
                     name="password"
@@ -74,7 +78,9 @@ const SignUp = () => {
                 />
             </div>
 
-            <button onClick={createUser}>Submit</button>
+            <button onClick={createUser} className="btn btn-primary">
+                Submit
+            </button>
         </div>
     );
 };
