@@ -8,7 +8,7 @@ const Authentication = () => {
 
     useEffect(() => {
         window.addEventListener('resize', resizeContainer);
-        // resizeContainer();
+        resizeContainer();
     });
 
     const resizeContainer = () => {
