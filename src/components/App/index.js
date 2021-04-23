@@ -13,26 +13,28 @@ function App() {
         <div>
             <Header/>
 
-            <Switch>
-                <Route exact path={"/product"}>
-                    <ProductList/>
-                </Route>
-                <Route path={"/product/:id"}>
-                    <Product/>
-                </Route>
-                <Route exact path={"/company"}>
-                    <CompanyList/>
-                </Route>
-                <Route path={"/company/:id"}>
-                    <Company/>
-                </Route>
-                <Route exact path={"/payment"}>
-                    <Payment/>
-                </Route>
-                <Route path={"/user/:userId"}>
-                    <User/>
-                </Route>
-            </Switch>
+            <div className="container-fluid">
+                <Switch>
+                    <Route exact path={"/product"}>
+                        <ProductList/>
+                    </Route>
+                    <Route path={"/product/:id"}>
+                        <Product/>
+                    </Route>
+                    <Route exact path={"/company"}>
+                        <CompanyList/>
+                    </Route>
+                    <Route path={"/company/:id"}>
+                        <Company/>
+                    </Route>
+                    <Route exact path={"/payment"}>
+                        <Payment/>
+                    </Route>
+                    <Route path={"/user/:userId"}>
+                        <User/>
+                    </Route>
+                </Switch>
+            </div>
         </div>
     );
 };
