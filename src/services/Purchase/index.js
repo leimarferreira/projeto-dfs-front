@@ -8,6 +8,10 @@ const get = id => {
     return api.get(`/purchase/${id}`);
 }
 
+const getByUserId = id => {
+    return api.get(`/purchase/byuser/${id}`);
+}
+
 const create = data => {
     return api.post("/purchase", data);
 }
@@ -23,6 +27,7 @@ const remove = id => {
 const PurchaseDataService = {
     getAll,
     get,
+    getByUserId,
     create,
     update,
     remove
