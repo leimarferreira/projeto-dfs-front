@@ -6,7 +6,7 @@ const Card = props => {
     const history = useHistory();
 
     const handleClick = event => {
-        history.push(`/product/${event.target.id}`);
+        history.push(`/product/${event.currentTarget.id}`);
     };
 
     return (
