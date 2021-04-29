@@ -1,7 +1,7 @@
 import { signIn } from './SignIn/index';
 
-const UserDataService = {
+const AuthenticationService = {
     signIn
 }
 
-export default UserDataService;
+export default AuthenticationService;
