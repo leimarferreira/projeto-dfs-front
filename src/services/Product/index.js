@@ -8,6 +8,10 @@ const get = id => {
     return api.get(`/product/${id}`);
 };
 
+const getByCompanyId = id => {
+    return api.get(`/product/bycompany/${id}`);
+};
+
 const create = data => {
     return api.post("/product", data);
 };
@@ -23,6 +27,7 @@ const remove = id => {
 const ProductDataService = {
     getAll,
     get,
+    getByCompanyId,
     create,
     update,
     remove,
