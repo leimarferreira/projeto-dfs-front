@@ -5,7 +5,6 @@ import Purchases from './Purchases/index';
 
 const User = () => {
     let { userId } = useParams();
-    console.log(userId);
 
     return (
         <div>
@@ -20,10 +19,10 @@ const User = () => {
 
             <div>
                 <Switch>
-                    <Route path={`/user/${userId}/info`}>
+                    <Route exact path={["/", "/user/:userId/info"]}>
                         <UserInfo/>
                     </Route>
-                    <Route path={`/user/${userId}/purchases`}>
+                    <Route path={"/user/:userId/purchases"}>
                         <Purchases/>
                     </Route>
                 </Switch>
