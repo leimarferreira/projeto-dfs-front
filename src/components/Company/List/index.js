@@ -20,7 +20,7 @@ const List = () => {
     };
 
     const companyCards = companies.map(company => {
-        return <CompanyCard company={company}/>
+        return <CompanyCard key={ company.id } company={ company }/>
     });
 
     return (

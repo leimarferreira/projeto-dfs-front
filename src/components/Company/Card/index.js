@@ -6,7 +6,7 @@ const Card = props => {
     const history = useHistory();
 
     const handleClick = event => {
-        history.push(`/company/${event.target.id}`);
+        history.push(`/company/${event.currentTarget.id}`);
     };
 
     return (
@@ -14,7 +14,7 @@ const Card = props => {
             <div className="card-body">
             </div>
             <div className="card-footer">
-                <p>{ company.name }</p>
+                <p>{ company.tradeName }</p>
             </div>
         </div>
     );
