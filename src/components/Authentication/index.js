@@ -27,7 +27,7 @@ const Authentication = () => {
 
     return (
         <div className="vertical-center">
-            <div className={`container ${containerSize} border rounded bg-light p-3`}>
+            <div className={`container ${containerSize} border rounded bg-light p-3 mx-2 mx-sm-auto`}>
                 <ul className="nav nav-tabs nav-justified">
                     <li className="nav-item">
                         <Link to="/signin" className="nav-link">Sign in</Link>

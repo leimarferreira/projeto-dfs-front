@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserDataService from '../../../services/User/index';
+import AuthenticationService from '../../../services/Authentication/index';
+import { TOKEN_KEY } from '../../../services/shared/api';
 
 const SignUp = () => {
     const [user, setUser] = useState({ id: null, name: "", email: "", password: "", cpf: "" });
+
+    const history = useHistory();
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -17,8 +22,27 @@ const SignUp = () => {
             password: user.password
         };
 
-        UserDataService.create(data);
+        UserDataService.create(data).then(() => {
+            sendLogin();
+        });
     };
+
+    const sendLogin = () => {
+        let data = {
+            email: user.email,
+            password: user.password
+        };
+
+        AuthenticationService.signIn(data)
+            .then(response => {
+                localStorage.setItem(TOKEN_KEY, response.data?.result?.token);
+                localStorage.setItem("currentUserId", response.data?.user?.id);
+                history.push("/product");
+            })
+            .catch(error => {
+                // TODO: show a error message to user
+            });
+    }
 
     return (
         <div>
@@ -78,7 +102,7 @@ const SignUp = () => {
                 />
             </div>
 
-            <button onClick={createUser} className="btn btn-primary">
+            <button onClick={createUser} className="btn btn-primary btn-block">
                 Submit
             </button>
         </div>

@@ -13,6 +13,7 @@ const SignIn = () => {
         setUser({ ...user, [name]: value });
     }
 
+    // TODO: remove the duplicated code in signin and signup
     const sendLogin = () => {
         let data = {
             email: user.email,
@@ -22,8 +23,8 @@ const SignIn = () => {
         AuthenticationService.signIn(data)
             .then(response => {
                 localStorage.setItem(TOKEN_KEY, response.data?.result?.token);
+                localStorage.setItem("currentUserId", response.data?.result?.user?.id);
                 history.push("/product");
-                // TODO: redirect the user to the main screen
             })
             .catch(error => {
                 // TODO: show a error message to user
@@ -60,7 +61,7 @@ const SignIn = () => {
                 />
             </div>
 
-            <button onClick={sendLogin} className="btn btn-primary">
+            <button onClick={sendLogin} className="btn btn-primary btn-block">
                 Submit
             </button>
         </div>
