@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import './index.css';
 
 const Card = props => {
     const product = props.product;
@@ -10,7 +11,7 @@ const Card = props => {
     };
 
     return (
-        <div className="card col-sm-4" id={ product.id } onClick={ handleClick }>
+        <div id={ product.id } onClick={ handleClick } className="card col-sm-4 m-1" role="navigation">
             <div className="card-body">
             </div>
             <div className="card-footer">
