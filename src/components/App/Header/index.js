@@ -14,9 +14,10 @@ const Header = () => {
 
     const retrieveUser = () => {
         const id = localStorage.getItem("currentUserId");
+        
         UserDataService.get(id)
             .then(response => {
-                setUser(response.data)
+                setUser(response.data);
             });
     };
 
@@ -35,7 +36,10 @@ const Header = () => {
                 <li className="nav-item">
                     <Link to="/company" className="nav-link">Companies</Link>
                 </li>
-                <li className="nav-item dropdown">
+                
+            </ul>
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item dropdown dropleft">
                     <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         { user.name }
                     </a>
@@ -47,7 +51,7 @@ const Header = () => {
                         <Link to={`/user/${ user.id }/purchases`} className="dropdown-item">
                             Purchase history
                         </Link>
-                        <a className="dropdown-item" onClick={ logOut }>Log out</a>
+                        <a className="dropdown-item text-danger" onClick={ logOut }>Log out</a>
                     </div>
                 </li>
             </ul>
