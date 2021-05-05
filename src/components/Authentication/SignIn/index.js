@@ -54,7 +54,7 @@ const SignIn = () => {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     required
                     value={user.password}
                     onChange={handleInputChange}

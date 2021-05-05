@@ -36,7 +36,7 @@ const SignUp = () => {
         AuthenticationService.signIn(data)
             .then(response => {
                 localStorage.setItem(TOKEN_KEY, response.data?.result?.token);
-                localStorage.setItem("currentUserId", response.data?.user?.id);
+                localStorage.setItem("currentUserId", response.data?.result?.user?.id);
                 history.push("/product");
             })
             .catch(error => {
@@ -53,7 +53,7 @@ const SignUp = () => {
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="John Smith"
+                    placeholder="Your Name"
                     required
                     value={user.name}
                     onChange={handleInputChange}
