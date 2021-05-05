@@ -5,23 +5,21 @@ import ProductCard from '../Card/index';
 const List = props => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        retrieveProducts();
+        retrieveProducts()
+            .then(setProducts);
+        // eslint-disable-next-line
     }, []);
 
-    const retrieveProducts = () => {
-        let productsPromise = null;
+    const retrieveProducts = async () => {
+        let response = null;
 
         if (props.companyId) {
-            productsPromise = ProductDataService.getByCompanyId(props.companyId);
+            response = await ProductDataService.getByCompanyId(props.companyId);
         } else {
-            productsPromise = ProductDataService.getAll();
+            response = await ProductDataService.getAll();
         }
 
-        productsPromise.then(response => {
-            setProducts(response.data);
-        }).catch(error => {
-            // TODO: do something here
-        });
+        return response.data;
     };
 
     const productCards = products.map(product => {
@@ -31,7 +29,7 @@ const List = props => {
     });
 
     return (
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
             {productCards}
         </div>
     );
