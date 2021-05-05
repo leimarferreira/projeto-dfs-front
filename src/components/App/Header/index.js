@@ -10,7 +10,7 @@ const Header = () => {
     const history = useHistory();
     useEffect(() => {
         retrieveUser();
-    }, {});
+    }, []);
 
     const retrieveUser = () => {
         const id = localStorage.getItem("currentUserId");
@@ -27,6 +27,7 @@ const Header = () => {
         history.push("/");
     };
 
+    // eslint-disable-next-line
     return (
         <div className="navbar navbar-expand-sm bg-dark sticky-top">
             <ul className="navbar-nav nav-pills">
@@ -51,7 +52,7 @@ const Header = () => {
                         <Link to={`/user/${ user.id }/purchases`} className="dropdown-item">
                             Purchase history
                         </Link>
-                        <a className="dropdown-item text-danger" onClick={ logOut }>Log out</a>
+                        <button className="dropdown-item text-danger" onClick={ logOut }>Log out</button>
                     </div>
                 </li>
             </ul>
