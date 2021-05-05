@@ -8,7 +8,7 @@ const User = () => {
 
     return (
         <div>
-            <ul className="nav nav-tabs nav-justified">
+            <ul className="nav nav-justified">
                 <li className="nav-item">
                     <Link to={`/user/${userId}/info`} className="nav-link">User informations</Link>
                 </li>

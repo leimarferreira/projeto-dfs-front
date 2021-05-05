@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import UserDateService from '../../../services/User/index';
+import UserDataService from '../../../services/User/index';
 
 const Info = () => {
-    const [user, setUser] = useState({});
     const { userId } = useParams();
+    const [user, setUser] = useState({});
+    
     useEffect(() => {
-        retrieveUser(userId);
-    });
+        retrieveUser(userId)
+            .then(setUser);
+    }, [userId]);
 
-    const retrieveUser = id => {
-        UserDateService.get(id)
-            .then(response => {
-                setUser(response.data);
-            })
-            .catch(error => {
-                // TODO: ...
-            });
+    const retrieveUser = async id => {
+        let response = await UserDataService.get(id);
+        return response.data;
     };
 
     const sendUserInfo = () => {
@@ -27,7 +24,7 @@ const Info = () => {
             password: user.password
         };
 
-        UserDateService.update(userId, data);
+        UserDataService.update(userId, data);
     };
 
     const handleInputChange = event => {

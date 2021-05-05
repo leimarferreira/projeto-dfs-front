@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PurchaseDataService from '../../../services/Purchase/index';
 
-const Purchases = props => {
-    const userId = props.userId;
+const Purchases = () => {
+    const { userId } = useParams();
     const [ purchases, setPurchases ] = useState([]);
 
     useEffect(() => {
-        retrievePurchases();
-    }, []);
+        retrievePurchases()
+            .then(setPurchaseDates)
+            .then(setPurchases);
+    }, [userId]);
+ 
+    const retrievePurchases = async () => {
+        let response = await PurchaseDataService.getByUserId(userId);
+        return response.data;
+    };
 
-    const retrievePurchases = () => {
-        let purchasesPromise = null;
+    const setPurchaseDates = purchases => {
+        let locales = ["pt-BR", "en-US"];
 
-        if (userId) {
-            purchasesPromise = PurchaseDataService.getByUserId(userId);
-        } else {
-            purchasesPromise = PurchaseDataService.getAll();
-        }
+        let options = {
+            dateStyle: "short",
+            timeStyle: "medium"
+        };
 
-        purchasesPromise.then(response => {
-            setPurchases(response.data);
-        }).catch(error => {
-            // TODO: do something here
+        let formatter = Intl.DateTimeFormat(locales, options);
+
+        purchases = purchases.map(purchase => {
+            let date = new Date(purchase.date);
+            let newDate = formatter.format(date);
+            purchase.date = newDate;
+            return purchase;
         });
-    }
+
+        return purchases;
+    };
 
     return (
-        <div>
+        <div className="table-responsive">
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -44,7 +55,11 @@ const Purchases = props => {
                             return (
                                 <tr key={ purchase.id }>
                                     <td>{ purchase.id }</td>
-                                    <td>Produto</td>
+                                    <td>
+                                        <Link to={`/product/${purchase.product.id}`}>
+                                            { purchase.product.name }
+                                        </Link>
+                                    </td>
                                     <td>{ purchase.date }</td>
                                     <td>{ purchase.value }</td>
                                     <td>{ purchase.status }</td>
