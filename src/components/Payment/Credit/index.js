@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PurchaseDataService from '../../../services/Purchase/index';
+import ProductDataService from '../../../services/Product/index';
 
 const Credit = () => {
     
+    const location = window.location.href;
+    const url = new URL(location);
+    const userId = url.searchParams.get("user");
+    const productId = url.searchParams.get("product");
+    const [purchase, setPurchase] = useState({});
+    const [product, setProduct] = useState({});
     const [paymentInfo, setPaymentInfo] = useState({
         name: "",
         cpf: "",
@@ -11,20 +19,29 @@ const Credit = () => {
         code: "",
     });
 
+    useEffect(() => {
+        let url = new URL(location);
+        let userId = url.searchParams.get("user");
+        let productId = url.searchParams.get("product");
+        setPurchase({ userId, productId });
+    }, [location]);
+
     const handleInputChange = event => {
         const { name, value } = event.target;
         setPaymentInfo({ ...paymentInfo, [name]: value });
     };
 
     const sendPaymentInfo = () => {
-        // TODO
+        console.log(purchase);
     };
 
     return (
         <div>
-            <div>
+            <h1>Finish purchase</h1>
+            <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="name"
                     name="name"
@@ -35,9 +52,10 @@ const Credit = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="cpf">CPF</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="cpf"
                     name="cpf"
@@ -48,9 +66,10 @@ const Credit = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="number">Number</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="number"
                     name="number"
@@ -61,9 +80,10 @@ const Credit = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="month">Month</label>
                 <input
+                    className="form-control"
                     type="month"
                     id="month"
                     name="month"
@@ -74,9 +94,10 @@ const Credit = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="year">Year</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="year"
                     name="year"
@@ -87,9 +108,10 @@ const Credit = () => {
                 />
             </div>
 
-            <div>
+            <div className="form-group">
                 <label htmlFor="code">Code</label>
                 <input
+                    className="form-control"
                     type="text"
                     id="code"
                     name="code"
@@ -100,7 +122,7 @@ const Credit = () => {
                 />
             </div>
 
-            <button onClick={sendPaymentInfo}>
+            <button onClick={sendPaymentInfo} className="btn btn-primary btn-block">
                 Submit
             </button>
         </div>
