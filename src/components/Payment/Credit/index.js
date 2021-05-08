@@ -3,126 +3,108 @@ import PurchaseDataService from '../../../services/Purchase/index';
 import ProductDataService from '../../../services/Product/index';
 
 const Credit = () => {
-    
-    const location = window.location.href;
-    const url = new URL(location);
-    const userId = url.searchParams.get("user");
-    const productId = url.searchParams.get("product");
-    const [purchase, setPurchase] = useState({});
+    const [userId, setUserId] = useState();
+    const [productId, setProductId] = useState();
     const [product, setProduct] = useState({});
-    const [paymentInfo, setPaymentInfo] = useState({
+    const [purchase, setPurchase] = useState({});
+    /* const [paymentInfo, setPaymentInfo] = useState({
         name: "",
         cpf: "",
         cardNumber: "",
         month: "",
         year: "",
         code: "",
-    });
+    }); */
 
     useEffect(() => {
-        let url = new URL(location);
-        let userId = url.searchParams.get("user");
-        let productId = url.searchParams.get("product");
-        setPurchase({ userId, productId });
-    }, [location]);
+        const url = new URL(window.location.href);
+        const userId = url.searchParams.get("user");
+        const productId = url.searchParams.get("product");
+        setUserId(userId);
+        setProductId(productId);
+    }, []);
+
+    useEffect(() => {
+        if (productId) {
+            retriveProduct(productId)
+                .then(setProduct);
+        }
+    }, [productId]);
+
+    useEffect(() => {
+        setPurchase({
+            ...purchase,
+            value: product.value,
+            paymentMethod: "credit",
+            status: "pending",
+            productId,
+            userId
+        });
+    }, [product, userId, productId]);
+
+    const retriveProduct = async productId => {
+        try {
+            let response = await ProductDataService.get(productId);
+            return response.data;
+        } catch (error) {
+
+        }
+    };
 
     const handleInputChange = event => {
         const { name, value } = event.target;
-        setPaymentInfo({ ...paymentInfo, [name]: value });
+        setPurchase({ ...purchase, [name]: value });
     };
 
-    const sendPaymentInfo = () => {
-        console.log(purchase);
+    const handleSubmit = () => {
+        let date = new Date().toISOString();
+        setPurchase({ ...purchase, date });
+        PurchaseDataService.create(purchase);
     };
 
     return (
         <div>
             <h1>Finish purchase</h1>
             <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="cep">CEP</label>
                 <input
                     className="form-control"
                     type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Full name"
+                    id="cep"
+                    name="postalCode"
+                    placeholder="xxxxx-xx"
                     required
-                    value={paymentInfo.name}
+                    value={purchase.postalCode}
                     onChange={handleInputChange}
                 />
             </div>
 
             <div className="form-group">
-                <label htmlFor="cpf">CPF</label>
+                <label htmlFor="address">Address</label>
                 <input
                     className="form-control"
                     type="text"
-                    id="cpf"
-                    name="cpf"
-                    placeholder="xxx.xxx.xxx-xx"
+                    id="address"
+                    name="address"
                     required
-                    value={paymentInfo.cpf}
+                    value={purchase.address}
                     onChange={handleInputChange}
                 />
             </div>
 
             <div className="form-group">
-                <label htmlFor="number">Number</label>
-                <input
+                <label htmlFor="note">Note</label>
+                <textarea
                     className="form-control"
                     type="text"
-                    id="number"
-                    name="number"
-                    placeholder="Number on the credit card"
-                    required
-                    value={paymentInfo.cardNumber}
+                    id="note"
+                    name="note"
+                    value={purchase.note}
                     onChange={handleInputChange}
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="month">Month</label>
-                <input
-                    className="form-control"
-                    type="month"
-                    id="month"
-                    name="month"
-                    placeholder="MM"
-                    required
-                    value={paymentInfo.month}
-                    onChange={handleInputChange}
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="year">Year</label>
-                <input
-                    className="form-control"
-                    type="text"
-                    id="year"
-                    name="year"
-                    placeholder="YYYY"
-                    required
-                    value={paymentInfo.year}
-                    onChange={handleInputChange}
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="code">Code</label>
-                <input
-                    className="form-control"
-                    type="text"
-                    id="code"
-                    name="code"
-                    placeholder="3 digits code on the card"
-                    required
-                    value={paymentInfo.code}
-                    onChange={handleInputChange}
-                />
-            </div>
-
-            <button onClick={sendPaymentInfo} className="btn btn-primary btn-block">
+            <button onClick={handleSubmit} className="btn btn-primary btn-block">
                 Submit
             </button>
         </div>
