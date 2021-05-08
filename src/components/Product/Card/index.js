@@ -11,13 +11,13 @@ const Card = props => {
     };
 
     return (
-        <div className="col p-1">
-            <div id={ product.id } onClick={ handleClick } className="card bg-light">
+        <div className="col p-2">
+            <div id={ product.id } onClick={ handleClick } className="card bg-light border rounded shadow">
                 <img alt="" className="card-img-top"/>
                 <div className="card-body p-1">
-                    <h4 className="card-title m-0">{ product.name }</h4>
-                    <p className="card-text text-secondary m-0">by { product.company.tradeName }</p>
-                    <p className="card-text m-0">{ product.value }</p>
+                    <h4 className="card-title m-1">{ product.name }</h4>
+                    <p className="card-text text-secondary m-1">by { product.company.tradeName }</p>
+                    <p className="card-text m-1">{ product.value }</p>
                 </div>
             </div>
         </div>

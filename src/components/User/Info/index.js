@@ -34,8 +34,8 @@ const Info = () => {
 
     return (
         <div>
-            <div className="form-group">
-                <label htmlFor="name">Name</label>
+            <div className="mb-3 p-3">
+                <label htmlFor="name" className="form-label">Name</label>
                 <input
                     className="form-control"
                     type="text"
@@ -47,8 +47,8 @@ const Info = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="cpf">CPF</label>
+            <div className="mb-3 p-3">
+                <label htmlFor="cpf" className="form-label">CPF</label>
                 <input
                     className="form-control"
                     type="text"
@@ -60,8 +60,8 @@ const Info = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="email">Email</label>
+            <div className="mb-3 p-3">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
                     className="form-control"
                     type="email"
@@ -73,8 +73,8 @@ const Info = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="password">Password</label>
+            <div className="mb-3 p-3">
+                <label htmlFor="password" className="form-label">Password</label>
                 <input
                     className="form-control"
                     type="password"
@@ -86,12 +86,14 @@ const Info = () => {
                 />
             </div>
 
-            <button onClick={sendUserInfo} className="btn btn-primary">
-                Save
-            </button>
-            <button onClick={retrieveUser} className="btn btn-primary">
-                Cancel
-            </button>
+            <div className="mb-3 p-3 d-grid gap-2 d-md-block">
+                <button onClick={sendUserInfo} className="btn btn-dark">
+                    Save
+                </button>
+                <button onClick={retrieveUser} className="btn btn-dark ms-md-2">
+                    Cancel
+                </button>
+            </div>
         </div>
     );
 };

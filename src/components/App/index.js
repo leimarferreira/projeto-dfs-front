@@ -13,7 +13,7 @@ function App() {
         <div>
             <Header/>
 
-            <div className="container-fluid">
+            <div className="container w-sm-75 w-md-50">
                 <Switch>
                     <Route exact path={"/product"}>
                         <ProductList/>

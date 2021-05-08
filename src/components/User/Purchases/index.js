@@ -56,7 +56,7 @@ const Purchases = () => {
                                 <tr key={ purchase.id }>
                                     <td>{ purchase.id }</td>
                                     <td>
-                                        <Link to={`/product/${purchase.product.id}`}>
+                                        <Link to={`/product/${purchase.product.id}`} className="text-dark">
                                             { purchase.product.name }
                                         </Link>
                                     </td>

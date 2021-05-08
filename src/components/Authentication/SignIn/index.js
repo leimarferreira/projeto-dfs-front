@@ -33,8 +33,8 @@ const SignIn = () => {
 
     return (
         <div>
-            <div className="form-group">
-                <label htmlFor="email">Email</label>
+            <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
                     className="form-control"
                     type="email"
@@ -47,8 +47,8 @@ const SignIn = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="password">Password</label>
+            <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
                 <input
                     className="form-control"
                     type="password"
@@ -61,9 +61,11 @@ const SignIn = () => {
                 />
             </div>
 
-            <button onClick={sendLogin} className="btn btn-primary btn-block">
-                Submit
-            </button>
+            <div className="mb-3 d-grid">
+                <button onClick={sendLogin} className="btn btn-dark">
+                    Submit
+                </button>
+            </div>
         </div>
     )
 }

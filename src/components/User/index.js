@@ -10,14 +10,14 @@ const User = () => {
         <div>
             <ul className="nav nav-justified">
                 <li className="nav-item">
-                    <Link to={`/user/${userId}/info`} className="nav-link">User informations</Link>
+                    <Link to={`/user/${userId}/info`} className="nav-link text-dark">User informations</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to={`/user/${userId}/purchases`} className="nav-link">Purchase history</Link>
+                    <Link to={`/user/${userId}/purchases`} className="nav-link text-dark">Purchase history</Link>
                 </li>
             </ul>
 
-            <div>
+            <div className="container g-3 p-3 bg-light border shadow">
                 <Switch>
                     <Route exact path={["/", "/user/:userId/info"]}>
                         <UserInfo/>

@@ -27,13 +27,13 @@ const Authentication = () => {
 
     return (
         <div className="vertical-center">
-            <div className={`container-fluid ${containerSize} border rounded bg-light p-3 mx-2 mx-sm-auto`}>
-                <ul className="nav nav-tabs nav-justified">
+            <div className={`container-fluid ${containerSize} border rounded bg-light p-3 mx-2 mx-sm-auto shadow-lg`}>
+                <ul className="nav nav-tabs nav-justified mb-3">
                     <li className="nav-item">
-                        <Link to="/signin" className="nav-link">Sign in</Link>
+                        <Link to="/signin" className="nav-link text-dark">Sign in</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/signup" className="nav-link">Sign up</Link>
+                        <Link to="/signup" className="nav-link text-dark">Sign up</Link>
                     </li>
                 </ul>
 

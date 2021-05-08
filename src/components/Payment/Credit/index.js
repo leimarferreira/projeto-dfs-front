@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import PurchaseDataService from '../../../services/Purchase/index';
-import ProductDataService from '../../../services/Product/index';
+import React from 'react';
 
 const Credit = () => {
-    const [userId, setUserId] = useState();
-    const [productId, setProductId] = useState();
-    const [product, setProduct] = useState({});
-    const [purchase, setPurchase] = useState({});
+    
     /* const [paymentInfo, setPaymentInfo] = useState({
         name: "",
         cpf: "",
@@ -16,97 +11,78 @@ const Credit = () => {
         code: "",
     }); */
 
-    useEffect(() => {
-        const url = new URL(window.location.href);
-        const userId = url.searchParams.get("user");
-        const productId = url.searchParams.get("product");
-        setUserId(userId);
-        setProductId(productId);
-    }, []);
-
-    useEffect(() => {
-        if (productId) {
-            retriveProduct(productId)
-                .then(setProduct);
-        }
-    }, [productId]);
-
-    useEffect(() => {
-        setPurchase({
-            ...purchase,
-            value: product.value,
-            paymentMethod: "credit",
-            status: "pending",
-            productId,
-            userId
-        });
-    }, [product, userId, productId]);
-
-    const retriveProduct = async productId => {
-        try {
-            let response = await ProductDataService.get(productId);
-            return response.data;
-        } catch (error) {
-
-        }
-    };
-
-    const handleInputChange = event => {
-        const { name, value } = event.target;
-        setPurchase({ ...purchase, [name]: value });
-    };
-
-    const handleSubmit = () => {
-        let date = new Date().toISOString();
-        setPurchase({ ...purchase, date });
-        PurchaseDataService.create(purchase);
-    };
-
     return (
-        <div>
-            <h1>Finish purchase</h1>
-            <div className="form-group">
-                <label htmlFor="cep">CEP</label>
+        <div className="row g-3">
+            <div className="col-md-9">
+                <label htmlFor="name" className="form-label">Name</label>
                 <input
                     className="form-control"
                     type="text"
-                    id="cep"
-                    name="postalCode"
-                    placeholder="xxxxx-xx"
+                    id="name"
+                    name="name"
+                    placeholder="Full name"
                     required
-                    value={purchase.postalCode}
-                    onChange={handleInputChange}
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="address">Address</label>
+            <div className="col-md-3">
+                <label htmlFor="cpf" className="form-label">CPF</label>
                 <input
                     className="form-control"
                     type="text"
-                    id="address"
-                    name="address"
+                    id="cpf"
+                    name="cpf"
+                    placeholder="xxx.xxx.xxx-xx"
                     required
-                    value={purchase.address}
-                    onChange={handleInputChange}
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="note">Note</label>
-                <textarea
+            <div>
+                <label htmlFor="cardNumber" className="form-label">Card number</label>
+                <input
                     className="form-control"
                     type="text"
-                    id="note"
-                    name="note"
-                    value={purchase.note}
-                    onChange={handleInputChange}
+                    id="cardNumber"
+                    name="cardNumber"
+                    placeholder="Card number"
+                    required
                 />
             </div>
 
-            <button onClick={handleSubmit} className="btn btn-primary btn-block">
-                Submit
-            </button>
+            <div className="col-md-4">
+                <label htmlFor="month">Month</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    id="month"
+                    name="month"
+                    placeholder="MM"
+                    required
+                />
+            </div>
+
+            <div className="col-md-4">
+                <label htmlFor="year">Year</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    id="year"
+                    name="year"
+                    placeholder="YYYY"
+                    required
+                />
+            </div>
+
+            <div className="col-md-4">
+                <label htmlFor="code">Security code</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    id="code"
+                    name="code"
+                    required
+                />
+            </div>
         </div>
     );
 };

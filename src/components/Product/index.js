@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import ProductDataService from '../../services/Product/index';
 
 const Product = () => {
-
-    const [product, setProduct] = useState({});
     const { id } = useParams();
-    useEffect(() => {
-        retrieveProduct(id);
-    });
+    const history = useHistory();
+    const [product, setProduct] = useState({});
 
-    const retrieveProduct = id => {
-        ProductDataService.get(id)
-            .then(response => {
-                setProduct(response.data);
-            })
-            .catch(error => {
-                // TODO: ...
-            });
+    useEffect(() => {
+        retrieveProduct(id)
+            .then(setProduct);
+    }, [id]);
+
+    const retrieveProduct = async id => {
+        let response = await ProductDataService.get(id);
+        return response.data;
     };
+
+    const redirectToPayment = () => {
+        let userId = localStorage.getItem("currentUserId");
+        history.push(`/payment?user=${userId}&product=${id}`);
+    }
 
     return (
         <div>
             <div>
-                <p>{ product.name }</p>
+                <h1>{ product.name }</h1>
+                <h4>{ product.company?.tradeName }</h4>
+                <h3>{ product.value }</h3>
+                <button onClick={redirectToPayment} className="btn btn-dark">
+                    Buy
+                </button>
                 <p>{ product.description }</p>
-                <p>{ product.value }</p>
-                <p>{ product.note }</p>
+                <div className="bg-note">
+                    <p>{ product.note }</p>
+                </div>
             </div>
-
-            <button>
-                Comprar
-            </button>
         </div>
     );
 };

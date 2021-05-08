@@ -46,8 +46,8 @@ const SignUp = () => {
 
     return (
         <div>
-            <div className="form-group">
-                <label htmlFor="name">Name</label>
+            <div className="mb-3">
+                <label htmlFor="name" className="form-label">Name</label>
                 <input
                     className="form-control"
                     type="text"
@@ -60,8 +60,8 @@ const SignUp = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="cpf">CPF</label>
+            <div className="mb-3">
+                <label htmlFor="cpf" className="form-label">CPF</label>
                 <input
                     className="form-control"
                     type="text"
@@ -74,8 +74,8 @@ const SignUp = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="email">Email</label>
+            <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
                     className="form-control"
                     type="email"
@@ -88,8 +88,8 @@ const SignUp = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="password">Password</label>
+            <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
                 <input
                     className="form-control"
                     type="password"
@@ -102,9 +102,11 @@ const SignUp = () => {
                 />
             </div>
 
-            <button onClick={createUser} className="btn btn-primary btn-block">
-                Submit
-            </button>
+            <div className="d-grid">
+                <button onClick={createUser} className="btn btn-dark">
+                    Submit
+                </button>
+            </div>
         </div>
     );
 };
