@@ -57,56 +57,60 @@ const Payment = () => {
     };
 
     return (
-        <div className="row g-3 mt-3 p-3 bg-light border rounded shadow">
-            <h1>Finish purchase</h1>
+        <div className="row mt-3 bg-light border rounded shadow">
+            <h1 className="my-3 flex-column">Finish purchase</h1>
 
             <PurchaseSummary/>
 
-            <Credit/>
+            <div className="col-sm-8">
+                <div className="row g-3 mt-3 p-3 bg-light border rounded shadow">
+                    <Credit/>
+                    
+                    <div className="col-md-2">
+                        <label htmlFor="cep" className="form-label">CEP</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="cep"
+                            name="postalCode"
+                            placeholder="xxxxx-xx"
+                            required
+                            value={purchase.postalCode}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-            <div className="col-md-2">
-                <label htmlFor="cep" className="form-label">CEP</label>
-                <input
-                    className="form-control"
-                    type="text"
-                    id="cep"
-                    name="postalCode"
-                    placeholder="xxxxx-xx"
-                    required
-                    value={purchase.postalCode}
-                    onChange={handleInputChange}
-                />
-            </div>
+                    <div className="col-md-10">
+                        <label htmlFor="address" className="form-label">Address</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="address"
+                            name="address"
+                            required
+                            value={purchase.address}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-            <div className="col-md-10">
-                <label htmlFor="address" className="form-label">Address</label>
-                <input
-                    className="form-control"
-                    type="text"
-                    id="address"
-                    name="address"
-                    required
-                    value={purchase.address}
-                    onChange={handleInputChange}
-                />
-            </div>
+                    <div className="col">
+                        <label htmlFor="note" className="form-label">Note</label>
+                        <textarea
+                            className="form-control"
+                            type="text"
+                            id="note"
+                            name="note"
+                            value={purchase.note}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-            <div className="col">
-                <label htmlFor="note" className="form-label">Note</label>
-                <textarea
-                    className="form-control"
-                    type="text"
-                    id="note"
-                    name="note"
-                    value={purchase.note}
-                    onChange={handleInputChange}
-                />
-            </div>
-
-            <div className="d-grid d-md-block">
-                <button onClick={handleSubmit} className="btn btn-dark">
-                    Submit
-                </button>
+                    <div className="d-grid d-md-block">
+                        <button onClick={handleSubmit} className="btn btn-dark d-md-flex ms-md-auto">
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
