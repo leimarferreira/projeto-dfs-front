@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductDataService from '../../services/Product/index';
 import PurchaseDataService from '../../services/Purchase/index';
 import Credit from './Credit/index';
+import PurchaseSummary from './PurchaseSummary/index';
 
 const Payment = () => {
     const [userId, setUserId] = useState();
@@ -58,6 +59,8 @@ const Payment = () => {
     return (
         <div className="row g-3 mt-3 p-3 bg-light border rounded shadow">
             <h1>Finish purchase</h1>
+
+            <PurchaseSummary/>
 
             <Credit/>
 
