@@ -17,16 +17,14 @@ const User = () => {
                 </li>
             </ul>
 
-            <div className="container g-3 p-3 bg-light border shadow">
-                <Switch>
-                    <Route exact path={["/", "/user/:userId/info"]}>
-                        <UserInfo/>
-                    </Route>
-                    <Route path={"/user/:userId/purchases"}>
-                        <Purchases/>
-                    </Route>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path={["/", "/user/:userId/info"]}>
+                    <UserInfo/>
+                </Route>
+                <Route path={"/user/:userId/purchases"}>
+                    <Purchases/>
+                </Route>
+            </Switch>
         </div>
     );
 };

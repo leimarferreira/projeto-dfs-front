@@ -33,8 +33,8 @@ const Info = () => {
     };
 
     return (
-        <div>
-            <div className="mb-3 p-3">
+        <div className="row mt-1 g-3 p-3 bg-light border rounded shadow">
+            <div>
                 <label htmlFor="name" className="form-label">Name</label>
                 <input
                     className="form-control"
@@ -47,7 +47,7 @@ const Info = () => {
                 />
             </div>
 
-            <div className="mb-3 p-3">
+            <div>
                 <label htmlFor="cpf" className="form-label">CPF</label>
                 <input
                     className="form-control"
@@ -60,7 +60,7 @@ const Info = () => {
                 />
             </div>
 
-            <div className="mb-3 p-3">
+            <div>
                 <label htmlFor="email" className="form-label">Email</label>
                 <input
                     className="form-control"
@@ -73,7 +73,7 @@ const Info = () => {
                 />
             </div>
 
-            <div className="mb-3 p-3">
+            <div>
                 <label htmlFor="password" className="form-label">Password</label>
                 <input
                     className="form-control"
@@ -86,7 +86,7 @@ const Info = () => {
                 />
             </div>
 
-            <div className="mb-3 p-3 d-grid gap-2 d-md-block">
+            <div className="d-grid gap-2 d-md-block">
                 <button onClick={sendUserInfo} className="btn btn-dark">
                     Save
                 </button>

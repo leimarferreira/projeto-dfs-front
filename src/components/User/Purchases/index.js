@@ -38,7 +38,7 @@ const Purchases = () => {
     };
 
     return (
-        <div className="table-responsive">
+        <div className="table-responsive mt-1 g-3 p-3 bg-light border rounded shadow">
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
