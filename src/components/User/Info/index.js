@@ -7,13 +7,16 @@ const Info = () => {
     const [user, setUser] = useState({});
     
     useEffect(() => {
-        retrieveUser(userId)
-            .then(setUser);
+        retrieveUser(userId);
     }, [userId]);
 
     const retrieveUser = async id => {
-        let response = await UserDataService.get(id);
-        return response.data;
+        try {
+            let response = await UserDataService.get(id);
+            setUser(response.data);
+        } catch (error) {
+            // TODO: handle this error
+        }
     };
 
     const sendUserInfo = () => {

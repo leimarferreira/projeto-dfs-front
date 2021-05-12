@@ -26,19 +26,21 @@ const Payment = () => {
     }, [productId]);
 
     useEffect(() => {
-        setPurchase({
-            ...purchase,
-            value: product.value,
-            paymentMethod: "credit",
-            status: "pending",
-            productId,
-            userId
+        setPurchase(purchase => {
+            return {
+                ...purchase,
+                value: product.value,
+                paymentMethod: "credit",
+                status: "pending",
+                productId,
+                userId
+            }
         });
     }, [product, userId, productId]);
 
     const retriveProduct = async productId => {
         try {
-            let response = await ProductDataService.get(productId);
+            const response = await ProductDataService.get(productId);
             return response.data;
         } catch (error) {
 
@@ -51,9 +53,12 @@ const Payment = () => {
     };
 
     const handleSubmit = () => {
-        let date = new Date().toISOString();
+        const date = new Date().toISOString();
         setPurchase({ ...purchase, date });
-        PurchaseDataService.create(purchase);
+        PurchaseDataService.create(purchase)
+            .then(response => {
+                console.log(`Status da resposta: ${response.status}`);
+            });
     };
 
     return (

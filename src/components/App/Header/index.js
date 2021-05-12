@@ -6,9 +6,13 @@ import './index.css';
 
 const Header = () => {
     const [user, setUser] = useState({});
+    const [error, setError] = useState(null);
+    
     const history = useHistory();
     useEffect(() => {
-        retrieveUser().then(setUser);
+        retrieveUser()
+            .then(setUser)
+            .catch(setError);
     }, []);
 
     const retrieveUser = async () => {
@@ -39,6 +43,7 @@ const Header = () => {
                     </li>
                     
                 </ul>
+                {!error &&
                 <ul className="navbar-nav navbar-pills d-flex ms-auto">
                     <li className="nav-item dropdown">
                         <button className="btn btn-link nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="true">
@@ -55,7 +60,7 @@ const Header = () => {
                             <button className="dropdown-item text-danger" onClick={ logOut }>Log out</button>
                         </div>
                     </li>
-                </ul>
+                </ul>}
             </div>
         </div>
     );

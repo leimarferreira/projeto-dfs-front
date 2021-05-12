@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Error from '../../common/Error';
 import PurchaseDataService from '../../../services/Purchase/index';
 
 const Purchases = () => {
     const { userId } = useParams();
     const [ purchases, setPurchases ] = useState([]);
+    const [ error, setError ] = useState(null);
 
     useEffect(() => {
         retrievePurchases()
             .then(setPurchaseDates)
-            .then(setPurchases);
+            .then(setPurchases)
+            .catch(setError);
     }, [userId]);
  
     const retrievePurchases = async () => {
@@ -37,7 +40,9 @@ const Purchases = () => {
         return purchases;
     };
 
-    return (
+    return error ? (
+        <Error message={"An error has occurred while retrieving purchase history."}/>
+    ) : (
         <div className="table-responsive mt-1 g-3 p-3 bg-light border rounded shadow">
             <table className="table table-hover table-bordered">
                 <thead>

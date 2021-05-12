@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthenticationService from '../../../services/Authentication/index';
+import Error from '../../common/Error/index';
 import { TOKEN_KEY } from '../../../services/shared/api';
 
 const SignIn = () => {
 
     const [user, setUser] = useState({ id: null, email: "", password: "" });
+    const [error, setError] = useState(false);
     const history = useHistory();
 
     const handleInputChange = event => {
@@ -26,9 +28,7 @@ const SignIn = () => {
                 localStorage.setItem("currentUserId", response.data?.result?.user?.id);
                 history.push("/product");
             })
-            .catch(error => {
-                // TODO: show a error message to user
-            });
+            .catch(setError);
     };
 
     return (
@@ -66,6 +66,9 @@ const SignIn = () => {
                     Submit
                 </button>
             </div>
+            {error &&
+                <Error message={error?.response?.data}/>
+            }
         </div>
     )
 }

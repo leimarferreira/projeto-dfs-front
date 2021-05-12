@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Error from '../../common/Error/index';
 import UserDataService from '../../../services/User/index';
 import AuthenticationService from '../../../services/Authentication/index';
 import { TOKEN_KEY } from '../../../services/shared/api';
 
 const SignUp = () => {
-    const [user, setUser] = useState({ id: null, name: "", email: "", password: "", cpf: "" });
+    const [user, setUser] = useState({
+        id: null,
+        name: "",
+        email: "",
+        password: "",
+        cpf: ""
+    });
+    const [error, setError] = useState(false);
 
     const history = useHistory();
 
@@ -15,16 +23,10 @@ const SignUp = () => {
     };
 
     const createUser = () => {
-        let data = {
-            name: user.name,
-            cpf: user.cpf,
-            email: user.email,
-            password: user.password
-        };
-
-        UserDataService.create(data).then(() => {
-            sendLogin();
-        });
+        UserDataService.create(user)
+            .then(() => {
+                sendLogin();
+            }).catch(setError);
     };
 
     const sendLogin = () => {
@@ -39,10 +41,9 @@ const SignUp = () => {
                 localStorage.setItem("currentUserId", response.data?.result?.user?.id);
                 history.push("/product");
             })
-            .catch(error => {
-                // TODO: show a error message to user
-            });
+            .catch(setError);
     }
+    // TODO: remove this sendlogin
 
     return (
         <div>
@@ -107,6 +108,9 @@ const SignUp = () => {
                     Submit
                 </button>
             </div>
+            {error &&
+            <Error message={error?.response?.data}/>
+            }
         </div>
     );
 };

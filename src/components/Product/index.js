@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
+import Error from '../common/Error/index';
 import ProductDataService from '../../services/Product/index';
 
 const Product = () => {
     const { id } = useParams();
     const history = useHistory();
     const [product, setProduct] = useState({});
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         retrieveProduct(id)
-            .then(setProduct);
+            .then(setProduct)
+            .catch(setError);
     }, [id]);
 
     const retrieveProduct = async id => {
@@ -22,7 +25,9 @@ const Product = () => {
         history.push(`/payment?user=${userId}&product=${id}`);
     }
 
-    return (
+    return error ? (
+        <Error message={"An error occurred while retrieving the product."}/>
+    ) : (
         <div>
             <div className="g-3 p-3">
                 <h1>{ product.name }</h1>
