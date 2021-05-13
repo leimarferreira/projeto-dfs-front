@@ -3,12 +3,24 @@ import ProductDataService from '../../services/Product/index';
 import PurchaseDataService from '../../services/Purchase/index';
 import Credit from './Credit/index';
 import PurchaseSummary from './PurchaseSummary/index';
+import Error from '../common/Error/index';
 
 const Payment = () => {
+    const [error, setError] = useState(null);
     const [userId, setUserId] = useState();
     const [productId, setProductId] = useState();
     const [product, setProduct] = useState({});
-    const [purchase, setPurchase] = useState({});
+    const [purchase, setPurchase] = useState({
+        value: null,
+        date: null,
+        status: "pending",
+        paymentMethod: "credit",
+        note: "",
+        postalCode: "",
+        address: "",
+        productId: null,
+        userId: null
+    });
 
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -16,22 +28,16 @@ const Payment = () => {
         const productId = url.searchParams.get("product");
         setUserId(userId);
         setProductId(productId);
+        retriveProduct(productId)
+            .then(setProduct)
+            .catch(setError);
     }, []);
-
-    useEffect(() => {
-        if (productId) {
-            retriveProduct(productId)
-                .then(setProduct);
-        }
-    }, [productId]);
 
     useEffect(() => {
         setPurchase(purchase => {
             return {
                 ...purchase,
                 value: product.value,
-                paymentMethod: "credit",
-                status: "pending",
                 productId,
                 userId
             }
@@ -39,12 +45,8 @@ const Payment = () => {
     }, [product, userId, productId]);
 
     const retriveProduct = async productId => {
-        try {
-            const response = await ProductDataService.get(productId);
-            return response.data;
-        } catch (error) {
-
-        }
+        const response = await ProductDataService.get(productId);
+        return response.data;
     };
 
     const handleInputChange = event => {
@@ -54,20 +56,23 @@ const Payment = () => {
 
     const handleSubmit = () => {
         const date = new Date().toISOString();
-        setPurchase({ ...purchase, date });
-        PurchaseDataService.create(purchase)
-            .then(response => {
-                console.log(`Status da resposta: ${response.status}`);
-            });
+        const data = {
+            ...purchase,
+            date
+        }
+        PurchaseDataService.create(data);
+        // TODO: handle a possible error here
     };
 
-    return (
+    return error ? (
+        <Error message={"An has occurred."} />
+    ) : (
         <div className="row mt-3 bg-light border rounded shadow">
             <h1 className="my-3 flex-column">Finish purchase</h1>
 
-            <PurchaseSummary/>
+            <PurchaseSummary purchase={purchase}/>
 
-            <div className="col-sm-8">
+            <div className="col-md-8">
                 <div className="row g-3 mt-3 p-3 bg-light border rounded shadow">
                     <Credit/>
                     
