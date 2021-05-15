@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductDataService from '../../services/Product/index';
 import PurchaseDataService from '../../services/Purchase/index';
 import Credit from './Credit/index';
@@ -6,6 +7,7 @@ import PurchaseSummary from './PurchaseSummary/index';
 import Error from '../common/Error/index';
 
 const Payment = () => {
+    const history = useHistory();
     const [error, setError] = useState(null);
     const [userId, setUserId] = useState();
     const [productId, setProductId] = useState();
@@ -60,19 +62,21 @@ const Payment = () => {
             ...purchase,
             date
         }
-        PurchaseDataService.create(data);
+        PurchaseDataService.create(data)
+            .then(() => history.push("/product"))
+            .catch(error => null);
         // TODO: handle a possible error here
     };
 
     return error ? (
-        <Error message={"An has occurred."} />
+        <Error message={"An error has occurred."} />
     ) : (
         <div className="row mt-3 bg-light border rounded shadow">
             <h1 className="my-3 flex-column">Finish purchase</h1>
 
             <PurchaseSummary purchase={purchase}/>
 
-            <div className="col-md-8">
+            <div className="col-lg-8">
                 <div className="row g-3 mt-3 p-3 bg-light border rounded shadow">
                     <Credit/>
                     

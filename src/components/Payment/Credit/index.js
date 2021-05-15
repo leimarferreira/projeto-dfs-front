@@ -50,7 +50,7 @@ const Credit = () => {
             </div>
 
             <div className="col-md-4">
-                <label htmlFor="month">Month</label>
+                <label htmlFor="month" className="form-label">Month</label>
                 <input
                     className="form-control"
                     type="text"
@@ -62,7 +62,7 @@ const Credit = () => {
             </div>
 
             <div className="col-md-4">
-                <label htmlFor="year">Year</label>
+                <label htmlFor="year" className="form-label">Year</label>
                 <input
                     className="form-control"
                     type="text"
@@ -74,7 +74,7 @@ const Credit = () => {
             </div>
 
             <div className="col-md-4">
-                <label htmlFor="code">Security code</label>
+                <label htmlFor="code" className="form-label">Security code</label>
                 <input
                     className="form-control"
                     type="text"
