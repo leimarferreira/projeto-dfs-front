@@ -26,6 +26,7 @@ const Header = () => {
         localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem("currentUserId");
         history.push("/");
+        window.location.reload();
     };
 
     return (

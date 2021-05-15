@@ -15,7 +15,7 @@ function App() {
 
             <div className="container w-sm-75 w-md-50">
                 <Switch>
-                    <Route exact path={"/product"}>
+                    <Route exact path={["/", "/product"]}>
                         <ProductList/>
                     </Route>
                     <Route path={"/product/:id"}>

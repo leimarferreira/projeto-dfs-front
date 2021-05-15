@@ -39,7 +39,7 @@ const SignUp = () => {
             .then(response => {
                 localStorage.setItem(TOKEN_KEY, response.data?.result?.token);
                 localStorage.setItem("currentUserId", response.data?.result?.user?.id);
-                history.push("/product");
+                history.push("/");
             })
             .catch(setError);
     }
