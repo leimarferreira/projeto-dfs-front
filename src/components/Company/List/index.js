@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import CompanyDataService from '../../../services/Company/index';
-import CompanyCard from '../Card/index';
+import Card from '../../common/Card/index';
 import Error from '../../common/Error/index';
 
 const List = () => {
     
     const [companies, setCompanies] = useState([]);
     const [error, setError] = useState(null);
+    const history = useHistory();
 
     useEffect(() => {
         retrieveCompanies()
@@ -20,7 +22,15 @@ const List = () => {
     };
 
     const companyCards = companies.map(company => {
-        return <CompanyCard key={ company.id } company={ company }/>
+        return (
+            <Card
+                key={ company.id }
+                img={ company.imageDataURL }
+                alt={ "Company" }
+                title={ company.tradeName }
+                click={ () => history.push(`/company/${company.id}`) }
+            />
+        );   
     });
 
     return error ? (
