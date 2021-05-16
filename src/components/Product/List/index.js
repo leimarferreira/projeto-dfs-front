@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductDataService from '../../../services/Product/index';
-import ProductCard from '../Card/index';
+import Card from '../../common/Card/index';
 import Error from '../../common/Error/index';
 
 const List = props => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
+    const history = useHistory();
     
     useEffect(() => {
         retrieveProducts()
@@ -27,7 +29,15 @@ const List = props => {
 
     const productCards = products.map(product => {
         return (
-            <ProductCard key={ product.id } product={ product }/>
+            <Card
+                key={ product.id }
+                img={ product.imageDataURL }
+                alt={ "Product" }
+                title={ product.name }
+                subtitle={ product.company.tradeName }
+                text={ product.value }
+                click={ () => history.push(`/product/${product.id}`) }
+            />
         );
     });
 
@@ -35,7 +45,7 @@ const List = props => {
         <Error message={"An error occurred while retrieving products."} />
     ) : (
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-            {productCards}
+            { productCards }
         </div>
     );
 };

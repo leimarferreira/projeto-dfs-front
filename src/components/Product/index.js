@@ -28,8 +28,9 @@ const Product = () => {
     return error ? (
         <Error message={"An error occurred while retrieving the product."}/>
     ) : (
-        <div>
-            <div className="g-3 p-3">
+        <div className="row mt-1 g-3 p-3 border rounded shadow">
+            <img src={product.imageDataURL} alt="Product" className="col-lg-6"/>
+            <div className="col-lg-6">
                 <h1>{ product.name }</h1>
                 <h5>
                     <Link to={`/company/${product.company?.id}`} className="text-secondary">
