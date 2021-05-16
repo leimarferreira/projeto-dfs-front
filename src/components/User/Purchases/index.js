@@ -31,7 +31,7 @@ const Purchases = () => {
         let formatter = Intl.DateTimeFormat(locales, options);
 
         purchases = purchases.map(purchase => {
-            let date = new Date(purchase.date);
+            let date = new Date(`${purchase.date}Z`);
             let newDate = formatter.format(date);
             purchase.date = newDate;
             return purchase;
