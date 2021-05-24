@@ -40,6 +40,32 @@ const Purchases = () => {
         return purchases;
     };
 
+    const printReceipt = purchase => {
+        let html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <style type="text/css" media="print">
+        @page { size: auto; margin: 0mm; }
+        </style>
+        </head>
+        <body>
+        <h1 style="text-align: center;">Shop name</h1>
+        <hr>
+        <p>Nº ${purchase.id}</p>
+        <hr>
+        <p>${purchase.product.name} ${purchase.product.value}</p>
+        <hr>
+        <p>Total: ${purchase.value}</p>
+        </body>
+        </html>
+        `;
+        let win = window.open();
+        win.document.write(html);
+        win.print();
+        win.close();
+    }
+
     return error ? (
         <Error message={"An error has occurred while retrieving purchase history."}/>
     ) : (
@@ -52,6 +78,7 @@ const Purchases = () => {
                         <th>Date</th>
                         <th>Value</th>
                         <th>Status</th>
+                        <th>Print</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,13 +88,18 @@ const Purchases = () => {
                                 <tr key={ purchase.id }>
                                     <td>{ purchase.id }</td>
                                     <td>
-                                        <Link to={`/product/${purchase.product.id}`} className="text-dark">
-                                            { purchase.product.name }
+                                        <Link to={`/product/${purchase?.product?.id}`} className="text-dark">
+                                            { purchase?.product?.name }
                                         </Link>
                                     </td>
                                     <td>{ purchase.date }</td>
                                     <td>{ purchase.value }</td>
                                     <td>{ purchase.status }</td>
+                                    <td>
+                                        <a href="#" onClick={() => printReceipt(purchase)}>
+                                            print
+                                        </a>
+                                    </td>
                                 </tr>
                             );
                         })
