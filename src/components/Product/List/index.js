@@ -13,6 +13,7 @@ const List = props => {
         retrieveProducts()
             .then(setProducts)
             .catch(setError);
+        // eslint-disable-next-line
     }, []);
 
     const retrieveProducts = async () => {
@@ -27,7 +28,7 @@ const List = props => {
         return response.data;
     };
 
-    const productCards = products.map(product => {
+    const productCards = products?.map(product => {
         return (
             <Card
                 key={ product.id }

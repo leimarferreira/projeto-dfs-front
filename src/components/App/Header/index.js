@@ -48,14 +48,14 @@ const Header = () => {
                 <ul className="navbar-nav navbar-pills d-flex ms-auto">
                     <li className="nav-item dropdown">
                         <button className="btn btn-link nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="true">
-                            { user.name }
+                            { user?.name }
                         </button>
 
                         <div className="dropdown-menu dropdown-menu-dark bg-dark dropdown-menu-start">
-                            <Link to={`/user/${ user.id }/info`} className="dropdown-item">
+                            <Link to={`/user/${ user?.id }/info`} className="dropdown-item">
                                 User info
                             </Link>
-                            <Link to={`/user/${ user.id }/purchases`} className="dropdown-item">
+                            <Link to={`/user/${ user?.id }/purchases`} className="dropdown-item">
                                 Purchase history
                             </Link>
                             <button className="dropdown-item text-danger" onClick={ logOut }>Log out</button>

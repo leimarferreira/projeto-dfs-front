@@ -13,6 +13,7 @@ const Product = () => {
         retrieveProduct(id)
             .then(setProduct)
             .catch(setError);
+        // eslint-disable-next-line
     }, [id]);
 
     const retrieveProduct = async id => {

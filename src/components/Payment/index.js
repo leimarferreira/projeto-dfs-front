@@ -64,8 +64,7 @@ const Payment = () => {
         }
         PurchaseDataService.create(data)
             .then(() => history.push("/product"))
-            .catch(error => null);
-        // TODO: handle a possible error here
+            .catch(setError);
     };
 
     return error ? (

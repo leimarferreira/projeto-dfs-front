@@ -13,6 +13,7 @@ const Purchases = () => {
             .then(setPurchaseDates)
             .then(setPurchases)
             .catch(setError);
+        // eslint-disable-next-line
     }, [userId]);
  
     const retrievePurchases = async () => {
@@ -47,16 +48,23 @@ const Purchases = () => {
         <head>
         <style type="text/css" media="print">
         @page { size: auto; margin: 0mm; }
+        .right { float: right; }
+        .bold { font-weight: bold; }
         </style>
         </head>
         <body>
-        <h1 style="text-align: center;">Shop name</h1>
+        <h1 style="text-align: center;">Purchase receipt</h1>
         <hr>
-        <p>Nº ${purchase.id}</p>
+        <p><span class="bold">Nº</span><span class="right">${purchase.id}</span></p>
+        <p><span class="bold">Vendor</span><span class="right">${purchase?.product?.company?.legalName}</p>
+        <p><span class="bold">Customer</span><span class="right">${purchase.buyer.name}</span></p>
+        <p><span class="bold">CPF</span><span class="right">${purchase.buyer.cpf}</span></p>
+        <p><span class="bold">Date</span><span class="right">${purchase.date}</span></p>
         <hr>
-        <p>${purchase.product.name} ${purchase.product.value}</p>
+        <p class="bold">Product <span class="right">Value</span></p>
+        <p>${purchase.product.name}<span class="right">$${purchase.product.value}</span></p>
         <hr>
-        <p>Total: ${purchase.value}</p>
+        <p><span class="bold">Total</span><span class="right">$${purchase.value}</span></p>
         </body>
         </html>
         `;
@@ -96,9 +104,9 @@ const Purchases = () => {
                                     <td>{ purchase.value }</td>
                                     <td>{ purchase.status }</td>
                                     <td>
-                                        <a href="#" onClick={() => printReceipt(purchase)}>
+                                        <button className="btn btn-link" onClick={() => printReceipt(purchase)}>
                                             print
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             );

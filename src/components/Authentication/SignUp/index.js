@@ -68,7 +68,7 @@ const SignUp = () => {
                     type="text"
                     id="cpf"
                     name="cpf"
-                    placeholder="xxx.xxx.xxx-xx"
+                    placeholder="Only numbers"
                     required
                     value={user.cpf}
                     onChange={handleInputChange}

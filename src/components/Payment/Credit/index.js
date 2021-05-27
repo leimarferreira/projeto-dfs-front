@@ -32,7 +32,7 @@ const Credit = () => {
                     type="text"
                     id="cpf"
                     name="cpf"
-                    placeholder="xxx.xxx.xxx-xx"
+                    placeholder="Only numbers"
                     required
                 />
             </div>

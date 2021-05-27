@@ -28,9 +28,9 @@ ReactDOM.render(
     <BrowserRouter>
         <Switch>
             <Route exact path="/">
-                {loggedIn
-                    ? <App/>
-                    : <Authentication/>
+                {!loggedIn
+                    ? <Authentication/>
+                    : <App/>
                 }
             </Route>
             <Route exact path={["/signin", "/signup"]}>

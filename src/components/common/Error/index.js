@@ -4,12 +4,14 @@ const Error = props => {
     const [message, setMessage] = useState("An error has occurred.");
 
     useEffect(() => {
-        setMessage(props.message);
+        if (props.message) {
+            setMessage(props.message);
+        }
     }, [props.message]);
 
     return (
         <div className="bg-danger mx-auto p-3 mt-1 text-center border rounded shadow-lg">
-            <p className="text-white">{message}</p>
+            <p className="text-white">{ message }</p>
         </div>
     );
 };
