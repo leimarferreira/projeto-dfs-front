@@ -68,7 +68,7 @@ const Payment = () => {
     };
 
     return error ? (
-        <Error message={"An error has occurred."} />
+        <Error message={"An error has occurred. Please fill all fields correctly."} />
     ) : (
         <div className="row mt-3 bg-light border rounded shadow">
             <h1 className="my-3 flex-column">Finish purchase</h1>

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import UserService from '../../../services/User/index';
 
 const Credit = () => {
-    
-    /* const [paymentInfo, setPaymentInfo] = useState({
-        name: "",
-        cpf: "",
-        cardNumber: "",
-        month: "",
-        year: "",
-        code: "",
-    }); */
+
+    const [user, setUser] = useState({ name: "", cpf: "" });
+    // eslint-disable-next-line
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        let userId = localStorage.getItem("currentUserId");
+        console.log(userId);
+        UserService.get(Number.parseInt(userId))
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(setError);
+    }, [])
 
     return (
         <div className="row g-3">
@@ -21,6 +27,8 @@ const Credit = () => {
                     id="name"
                     name="name"
                     placeholder="Full name"
+                    value={ user.name }
+                    disabled
                     required
                 />
             </div>
@@ -33,6 +41,8 @@ const Credit = () => {
                     id="cpf"
                     name="cpf"
                     placeholder="Only numbers"
+                    value={user.cpf}
+                    disabled
                     required
                 />
             </div>
