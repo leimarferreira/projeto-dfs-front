@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import App from './components/App/index';
 import Authentication from './components/Authentication';
-import { getToken } from './services/shared/api';
+import { getToken, isTokenExpired } from './services/shared/api';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './extensions/LocalStorage.js';
 
 const isLoggedIn = () => {
     let token = getToken();
 
-    if (token) {
+    if (token && !isTokenExpired(token)) {
         return true;
     }
 
@@ -19,10 +18,6 @@ const isLoggedIn = () => {
 };
 
 let loggedIn = isLoggedIn();
-
-window.addEventListener('storagechange', () => {
-    loggedIn = isLoggedIn();
-});
 
 ReactDOM.render(
     <BrowserRouter>

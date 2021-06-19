@@ -43,7 +43,6 @@ const SignUp = () => {
             })
             .catch(setError);
     }
-    // TODO: remove this sendlogin
 
     return (
         <div>

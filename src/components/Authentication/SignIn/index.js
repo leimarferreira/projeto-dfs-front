@@ -13,7 +13,6 @@ const SignIn = () => {
         setUser({ ...user, [name]: value });
     }
 
-    // TODO: remove the duplicated code in signin and signup
     const sendLogin = () => {
         let data = {
             email: user.email,
