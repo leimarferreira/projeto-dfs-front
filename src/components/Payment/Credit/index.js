@@ -9,7 +9,6 @@ const Credit = () => {
 
     useEffect(() => {
         let userId = localStorage.getItem("currentUserId");
-        console.log(userId);
         UserService.get(Number.parseInt(userId))
             .then(response => {
                 setUser(response.data);

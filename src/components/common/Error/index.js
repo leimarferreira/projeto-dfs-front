@@ -4,7 +4,8 @@ const Error = props => {
     const [message, setMessage] = useState("An error has occurred.");
 
     useEffect(() => {
-        if (props.message) {
+        if (props.message && typeof(props.message) != "object") {
+            console.log(typeof(props.message))
             setMessage(props.message);
         }
     }, [props.message]);
