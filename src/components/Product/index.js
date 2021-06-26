@@ -37,7 +37,7 @@ const Product = () => {
                         { product.company?.tradeName }
                     </Link>
                 </h5>
-                <h3>{ product.value }</h3>
+                <h3>${ product.value }</h3>
                 <button onClick={redirectToPayment} className="btn btn-dark">
                     Buy
                 </button>

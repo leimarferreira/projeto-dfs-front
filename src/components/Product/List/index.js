@@ -36,7 +36,7 @@ const List = props => {
                 alt={ "Product" }
                 title={ product.name }
                 subtitle={ product.company.tradeName }
-                text={ product.value }
+                text={ `$${product.value}` }
                 click={ () => history.push(`/product/${product.id}`) }
             />
         );
